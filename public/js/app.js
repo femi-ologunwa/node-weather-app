@@ -1,4 +1,4 @@
-console.log('Client side javascript file is loaded..');
+console.log('Client side javascript file is loaded...');
 
 /*
 How to make http request for weather data from client-side javascript in the browser.
