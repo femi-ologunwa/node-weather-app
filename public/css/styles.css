@@ -48,10 +48,15 @@ footer {
 
 .portrait {
 	width: 250px;
+	margin-top: 20px;
 }
 
 p {
 	margin-top: 20px;
+}
+
+.info {
+	margin-top: 0;
 }
 
 form {
