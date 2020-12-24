@@ -45,20 +45,18 @@ weatherForm.addEventListener('submit', (e) => {
 	msgOne.textContent = 'Loading...';
 	msgTwo.textContent = '';
 
-	//passing the location to our created api
-	fetch('http://localhost:5000/weather?address=' + location).then(
-		(response) => {
-			response.json().then((data) => {
-				if (data.error) {
-					//console.log(data.error);
-					msgOne.textContent = data.error;
-				} else {
-					//console.log(data.location);
-					//console.log(data.forecast);
-					msgOne.textContent = data.location;
-					msgTwo.textContent = data.forecast;
-				}
-			});
-		}
-	);
+	//passing the location to our created api on the localhost or herokuapp url
+	fetch('weather?address=' + location).then((response) => {
+		response.json().then((data) => {
+			if (data.error) {
+				//console.log(data.error);
+				msgOne.textContent = data.error;
+			} else {
+				//console.log(data.location);
+				//console.log(data.forecast);
+				msgOne.textContent = data.location;
+				msgTwo.textContent = data.forecast;
+			}
+		});
+	});
 });

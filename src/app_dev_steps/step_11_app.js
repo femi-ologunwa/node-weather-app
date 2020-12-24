@@ -9,13 +9,22 @@ const hbs = require('hbs');
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
 
-//MODIFYING APP JS TO ACCOMODATE DEPLOYMENT FOR HEROKU
-//====================================================
+//WIRING UP THE CREATED WEATHER HTTP JSON ENDPOINTS TO
+// USE THE GEOCODE AND FORECAST FUNCTIONS
+//==================================================
+/* Here we will conect the already created geocode and forecast functions with the weather JSON endpoint created in the last episode. 
+To do this we will move/copy the utils folder (which contains both the geocode and forecast functions needed here) from the weather-app project to the src folder of the web-server project
+Since the forecast and geocode functions made use of an npm package called request, we will have to install this package into our webserver project.
+We can now use geocode and forecast in the callbacks of the weather JSON endpoint
+We will:
+	- require geocode/forecast into app.js
+	- use the entered address to geocode
+	- use the coordinates to get forecase
+	- send back the real forecast and location
+*/
 
 //generating a new instance of the server application
 const app = express();
-
-const port = process.env.PORT || 5000;
 
 //==================== Configuring paths =======================
 
@@ -84,6 +93,7 @@ app.get('/weather', (req, res) => {
 		});
 	}
 
+	//{longitude, latitude, location}={} => this implies setting a default object value to avoid an undefined scenario in the destructuring process. This prevents the code from breaking
 	geocode(
 		req.query.address,
 		(error, { longitude, latitude, location } = {}) => {
@@ -129,6 +139,6 @@ app.get('*', (req, res) => {
 //============= Accessing Contents Served By Express Server =====================
 
 //starting up the server at port 5000
-app.listen(port, () => {
-	console.log('Server is up on port ' + port + '...');
+app.listen(5000, () => {
+	console.log('Server is up on port 5000...');
 });
